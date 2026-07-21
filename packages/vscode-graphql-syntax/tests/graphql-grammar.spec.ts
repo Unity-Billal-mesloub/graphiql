@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { tokenizeFile } from './__utilities__/utilities';
 
 describe('source.graphql grammar', () => {
@@ -17,6 +18,13 @@ describe('source.graphql grammar', () => {
   it('should tokenize an advanced schema', async () => {
     const result = await tokenizeFile(
       '__fixtures__/StarWarsSchema.graphql',
+      scope,
+    );
+    expect(result).toMatchSnapshot();
+  });
+  it('should tokenize descriptions as documentation and argument values as strings', async () => {
+    const result = await tokenizeFile(
+      '__fixtures__/descriptions-and-values.graphql',
       scope,
     );
     expect(result).toMatchSnapshot();

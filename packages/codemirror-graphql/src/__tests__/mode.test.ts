@@ -11,6 +11,7 @@ import CodeMirror from 'codemirror';
 import 'codemirror/addon/runmode/runmode';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { describe, expect, it } from 'vitest';
 import '../mode';
 
 describe('graphql-mode', () => {
@@ -86,6 +87,24 @@ describe('graphql-mode', () => {
     );
 
     CodeMirror.runMode(schemaKitchenSink, 'graphql', (_token, style) => {
+      expect(style).not.toBe('invalidchar');
+    });
+  });
+
+  it('parses type system definitions without a body without invalidchar', () => {
+    const schema = `
+      type EmptyType @onType
+      interface EmptyInterface @onInterface
+      enum EmptyEnum @onEnum
+      input EmptyInput @onInputObject
+
+      extend type Foo @onType
+      extend interface Bar @onInterface
+      extend enum Site @onEnum
+      extend input InputType @onInputObject
+    `;
+
+    CodeMirror.runMode(schema, 'graphql', (_token, style) => {
       expect(style).not.toBe('invalidchar');
     });
   });

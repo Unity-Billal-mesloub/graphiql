@@ -1,53 +1,25 @@
 name: PR
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, reopened, synchronize]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  install:
-    name: Install
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.1
-        with:
-          access_token: ${{ github.token }}
-      - name: Checkout Code
-        uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: yarn
-      - name: Cache node modules
-        id: cache-modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      - run: yarn install --frozen-lockfile --immutable
-
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [install]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - id: cache-modules
-        uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
       - run: yarn build
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           key: build-${{ github.sha }}
           path: ${{ env.BUILD-CACHE-LIST }}
@@ -55,106 +27,86 @@ jobs:
   cspell:
     name: CSpell
     runs-on: ubuntu-latest
-    needs: [install]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - id: cache-modules
-        uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
       - run: yarn lint-cspell
 
-  prettier:
-    name: Prettier
+  format:
+    name: Format
     runs-on: ubuntu-latest
-    needs: [install]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - id: cache-modules
-        uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-      - run: yarn pretty-check
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
+      - run: yarn format-check
+      - run: yarn svgo-check
 
-  jest:
-    name: Jest Unit & Integration Tests
+  dedupe-check:
+    name: Yarn Dedupe Check
     runs-on: ubuntu-latest
-    needs: [install]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - id: cache-modules
-        uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-      - run: yarn test --coverage
-      - uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage/lcov.info
-          fail_ci_if_error: true
-          verbose: true
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
+      - run: yarn dedupe --check
 
   vitest:
     name: Vitest Unit Tests
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - id: cache-modules
-        uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-      - uses: actions/cache@v4
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
+      - uses: actions/cache@v5
         with:
           key: build-${{ github.sha }}
           path: ${{ env.BUILD-CACHE-LIST }}
-      - run: yarn vitest
+      - run: yarn test
 
-  eslint:
-    name: ESLint
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - id: cache-modules
-        uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-      - uses: actions/cache@v4
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
+      - uses: actions/cache@v5
         with:
           key: build-${{ github.sha }}
           path: ${{ env.BUILD-CACHE-LIST }}
-      - run: yarn eslint
+      - run: yarn oxlint
 
   types-check:
     name: Types Check
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - id: cache-modules
-        uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-      - uses: actions/cache@v4
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
+      - uses: actions/cache@v5
         with:
           key: build-${{ github.sha }}
           path: ${{ env.BUILD-CACHE-LIST }}
@@ -165,115 +117,66 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - uses: actions/checkout@v4
-      - id: cache-modules
-        uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-      - uses: actions/cache@v4
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
+      - uses: actions/cache@v5
         with:
           key: build-${{ github.sha }}
           path: ${{ env.BUILD-CACHE-LIST }}
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: |
             ~/.cache/Cypress
           key: cypress-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           command: yarn e2e
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: cypress-screenshots
           path: packages/graphiql/cypress/screenshots
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: cypress-videos
           path: packages/graphiql/cypress/videos
           if-no-files-found: ignore
 
-  canary:
-    name: Canary
+  pkg-pr-new:
+    name: Canary Builds
     runs-on: ubuntu-latest
-    # ensure the basic checks pass before running the canary
-    needs: [build, jest, eslint, vitest, e2e]
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: [build, lint, vitest, e2e]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-      - id: cache-modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-      - uses: actions/cache@v4
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
+      - uses: actions/cache@v5
         with:
           key: build-${{ github.sha }}
           path: ${{ env.BUILD-CACHE-LIST }}
-      - name: Setup NPM credentials
-        run: echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Release Canary
-        id: canary
-        uses: 'kamilkisiela/release-canary@master'
-        with:
-          npm-token: ${{ secrets.NPM_TOKEN }}
-          npm-script: 'yarn release:canary'
-          changesets: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish a message
-        if: steps.canary.outputs.released == 'true'
-        uses: 'dotansimha/pr-comment@master'
-        with:
-          commentKey: canary
-          message: |
-            The latest changes of this PR are available as canary in npm (based on the declared `changesets`):
-
-            ```
-            ${{ steps.canary.outputs.changesetsPublishedPackages}}
-            ```
-          bot-token: ${{ secrets.GITHUB_TOKEN }}
-          bot: 'github-actions[bot]'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish an empty message
-        if: steps.canary.outputs.released == 'false'
-        uses: 'dotansimha/pr-comment@master'
-        with:
-          commentKey: canary
-          message: |
-            The latest changes of this PR are not available as canary, since there are no linked `changesets` for this PR.
-          bot-token: ${{ secrets.GITHUB_TOKEN }}
-          bot: 'github-actions[bot]'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: npx pkg-pr-new publish --comment=off './packages/*'
 
   license-check:
     name: Check Licenses
     runs-on: ubuntu-latest
-    needs: [install]
-
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - id: cache-modules
-        uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: |
-            **/node_modules
-          key: modules-${{ github.sha }}
-      - run: yarn install --frozen-lockfile --immutable
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --immutable
       - name: License Check
         run: yarn license-check
 

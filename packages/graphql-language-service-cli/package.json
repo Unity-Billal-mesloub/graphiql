@@ -25,8 +25,8 @@
     "src"
   ],
   "scripts": {
-    "types:check": "tsc --noEmit",
-    "test": "vitest"
+    "types:check": "tsgo --noEmit",
+    "test": "vitest run"
   },
   "keywords": [
     "graphql",

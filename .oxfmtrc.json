@@ -1,20 +1,17 @@
 {
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
   "singleQuote": true,
   "trailingComma": "all",
   "arrowParens": "avoid",
   "proseWrap": "never",
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "ignorePatterns": ["**/CHANGELOG.md", "working-group/agendas/**"],
   "overrides": [
     {
       "files": ["*.md", "*.mdx"],
       "options": {
-        "printWidth": 80,
         "proseWrap": "preserve"
-      }
-    },
-    {
-      "files": "*.svg",
-      "options": {
-        "parser": "html"
       }
     }
   ]

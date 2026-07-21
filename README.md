@@ -12,6 +12,7 @@
 > [`packages/graphiql`](packages/graphiql)
 
 [![Build Status](https://github.com/graphql/graphiql/workflows/Node.JS%20CI/badge.svg)](https://github.com/graphql/graphiql/actions?query=workflow%3A%22Node.JS+CI%22)
+[![pkg.pr.new](https://pkg.pr.new/badge/graphql/graphiql)](https://pkg.pr.new/~/graphql/graphiql)
 [![Discord](https://img.shields.io/discord/625400653321076807.svg)](https://discord.gg/NP5vbPeUFp)
 [![Code Coverage](https://img.shields.io/codecov/c/github/graphql/graphiql)](https://codecov.io/gh/graphql/graphiql)
 ![GitHub top language](https://img.shields.io/github/languages/top/graphql/graphiql)
@@ -21,9 +22,9 @@
 
 ## Overview
 
-GraphiQL is the reference implementation of this monorepo, GraphQL IDE, an
-official project under the GraphQL Foundation. The code uses the permissive MIT
-license.
+GraphiQL (pronounced like "graphical") is the reference implementation of this
+monorepo, GraphQL IDE, an official project under the GraphQL Foundation. The
+code uses the permissive MIT license.
 
 Whether you want a simple GraphiQL IDE instance for your server, or a more
 advanced web or desktop GraphQL IDE experience for your framework or plugin, or
@@ -248,6 +249,7 @@ our discord channels!):
 - [@saihaj](https://github.com/saihaj)
 - [@jonathanawesome](https://github.com/jonathanawesome)
 - [@cshaver](https://github.com/cshaver)
+- [@trevor-scheer](https://github.com/trevor-scheer)
 
 > Thank you graphql community for all the help & support! I did it all for you,
 > and I couldn't have done it without you ❤️ - @acao

@@ -177,9 +177,9 @@ graphql                                | entity.name.function.tagged-template.js
 (                                      | 
 \`                                      | punctuation.definition.string.template.begin.js
                                        | meta.embedded.block.graphql
-"""                                    | meta.embedded.block.graphql comment.line.graphql.js punctuation.whitespace.comment.leading.graphql
- this is a comment                     | meta.embedded.block.graphql comment.line.graphql.js
-"""                                    | meta.embedded.block.graphql comment.line.graphql.js
+"""                                    | meta.embedded.block.graphql comment.block.documentation.graphql
+ this is an operation description      | meta.embedded.block.graphql comment.block.documentation.graphql
+"""                                    | meta.embedded.block.graphql comment.block.documentation.graphql
                                        | meta.embedded.block.graphql
 query                                  | meta.embedded.block.graphql keyword.operation.graphql
                                        | meta.embedded.block.graphql meta.selectionset.graphql
@@ -223,6 +223,7 @@ graphql                                | entity.name.function.tagged-template.js
 \`                                      | punctuation.definition.string.template.begin.js
                                        | meta.embedded.block.graphql
 query                                  | meta.embedded.block.graphql keyword.operation.graphql
+                                       | meta.embedded.block.graphql
 (                                      | meta.embedded.block.graphql meta.brace.round.graphql
 $id                                    | meta.embedded.block.graphql meta.variables.graphql variable.parameter.graphql
 :                                      | meta.embedded.block.graphql meta.variables.graphql punctuation.colon.graphql
@@ -239,7 +240,7 @@ test                                   | meta.embedded.block.graphql meta.select
                                        | meta.embedded.block.graphql
 \`                                      | punctuation.definition.string.template.end.js
 ,                                      | 
-  [var1, var2]                         | 
+  [var1, var2],                        | 
 )                                      | 
 ;                                      | 
                                        | 
@@ -285,7 +286,6 @@ id                                     | meta.embedded.block.graphql meta.select
 const query =                          | 
 graphql                                | entity.name.function.tagged-template.js
 (                                      | 
-                                       | 
 '                                      | punctuation.definition.string.template.begin.js
 query                                  | meta.embedded.block.graphql keyword.operation.graphql
 (                                      | meta.embedded.block.graphql meta.brace.round.graphql
@@ -418,10 +418,8 @@ const queryWithLeadingComment =        |
 query                                  | meta.embedded.block.graphql keyword.operation.graphql
                                        | meta.embedded.block.graphql meta.selectionset.graphql
 {                                      | meta.embedded.block.graphql meta.selectionset.graphql punctuation.operation.graphql
-                                       | meta.embedded.block.graphql meta.selectionset.graphql
-"""                                    | meta.embedded.block.graphql meta.selectionset.graphql comment.line.graphql.js punctuation.whitespace.comment.leading.graphql
- this is a comment                     | meta.embedded.block.graphql meta.selectionset.graphql comment.line.graphql.js
-"""                                    | meta.embedded.block.graphql meta.selectionset.graphql comment.line.graphql.js
+                                       | meta.embedded.block.graphql meta.selectionset.graphql comment.line.graphql.js punctuation.whitespace.comment.leading.graphql
+# this is a comment                    | meta.embedded.block.graphql meta.selectionset.graphql comment.line.graphql.js
                                        | meta.embedded.block.graphql meta.selectionset.graphql
 user                                   | meta.embedded.block.graphql meta.selectionset.graphql variable.graphql
 (                                      | meta.embedded.block.graphql meta.selectionset.graphql meta.arguments.graphql meta.brace.round.directive.graphql
@@ -608,7 +606,6 @@ id                              | meta.embedded.block.graphql meta.selectionset.
 const query =                   | 
 graphql                         | entity.name.function.tagged-template.js
 (                               | 
-                                | 
 '                               | punctuation.definition.string.template.begin.js
 query                           | meta.embedded.block.graphql keyword.operation.graphql
                                 | meta.embedded.block.graphql meta.selectionset.graphql
@@ -624,7 +621,6 @@ id                              | meta.embedded.block.graphql meta.selectionset.
 const query =                   | 
 graphql                         | entity.name.function.tagged-template.js
 <Generic>(                      | 
-                                | 
 '                               | punctuation.definition.string.template.begin.js
 query                           | meta.embedded.block.graphql keyword.operation.graphql
                                 | meta.embedded.block.graphql meta.selectionset.graphql
@@ -669,7 +665,7 @@ id                              | meta.embedded.block.graphql meta.selectionset.
                                 | meta.embedded.block.graphql
 \`                               | punctuation.definition.string.template.end.js
 ,                               | 
-  [var1, var2]                  | 
+  [var1, var2],                 | 
 )                               | 
 ;                               | 
                                 | 

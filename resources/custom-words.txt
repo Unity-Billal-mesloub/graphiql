@@ -1,3 +1,7 @@
+Здорово
+أهلاً
+سلام
+हेलो
 //   short for "developer experience":
 //   short for "maintainers":
 //   short for "platform as a service":
@@ -13,7 +17,6 @@
 // other languages
 // packages and tools
 // phonetic notation
-ˈɡrafək
 acao
 acmerc
 aivazis
@@ -89,6 +92,7 @@ GraphiQL
 graphqlconfig
 graphqlrc
 graphqls
+ˈɡrafək
 harshith
 headlessui
 heyenbrock
@@ -96,9 +100,9 @@ hola
 htmling
 hurrell
 hyohyeon
-importmap
 ical
 imolorhe
+importmap
 inno
 intellij
 invalidchar
@@ -107,19 +111,20 @@ jeong
 jiti
 jonathanawesome
 jsdelivr
+jsgl
+keymap
 kumar
 languageservice
 leebyron
 Leko
 LekoArts
 lezer
+lightningcss
 linenumber
 linenumbers
 linkify
 listbox
-lightningcss
 listvalues
-lightningcss
 lostplan
 maint
 manypkg
@@ -129,14 +134,19 @@ medellín
 menlo
 meros
 middlewares
+minipass
 mockfs
 modulemap
+multipass
 nauroze
 newhope
+ngql
 nextjs
+nodenext
 nishchit
 nocheck
 nocursor
+nodenext
 nonmatchingbracket
 novvum
 nowdoc
@@ -152,6 +162,9 @@ orta
 outdir
 outlineable
 ovsx
+oxfmt
+oxlint
+oxlintrc
 paas
 pabbati
 picomatch
@@ -193,11 +206,15 @@ snyk
 socker
 sonarjs
 sorare
+spawndamnit
 squirrelly
 stonexer
 streamable
+subpath
+subpaths
 subword
 suchanek
+svgo
 svgr
 tanay
 tanaypratap
@@ -208,16 +225,16 @@ thomasheyenbrock
 timsuchanek
 tokenizes
 tsup
+turbopack
 typeahead
 typeaheads
 typedoc
 typeof
-turbopack
+uncurried
 unfocus
 unnormalized
 unparsable
 unsubscribable
-uncurried
 urigo
 urql
 usememo
@@ -229,13 +246,11 @@ vizag
 vsix
 webp
 websockets
+webworker
 wgutils
+whatwg
 wincent
 wonka
 yoshiakis
-zustand
 zdravo
-Здорово
-أهلاً
-سلام
-हेलो
+zustand
