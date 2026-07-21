@@ -205,7 +205,7 @@ maintainer). The bots that have currently been approved as exceptions are:
 - github-actions (exclusively for the `changesets` Action)
 
 You can find
-[detailed information here](https://github.com/graphql/graphql-wg/tree/main/membership).
+[detailed information here](https://github.com/Unity-Billal-mesloub/graphql-wg/tree/main/membership).
 If you have issues, please email
 [operations@graphql.org](mailto:operations@graphql.org).
 
@@ -218,38 +218,14 @@ the GraphiQL roadmap
 
 Without these amazing past maintainers, where would we be?!
 
-- [@leebyron](https://github.com/leebyron) - original author of all libraries
-- [@asiandrummer](https://github.com/asiandrummer) - original creator of
-  GraphiQL
-- [@wincent](https://github.com/wincent) - early co-author and maintainer
-- [@lostplan](https://github.com/lostplan) - maintained the language service
-  ecosystem until about 2017
-- [@IvanGoncharov](https://github.com/ivangoncharov) - maintainer and
-  transitional mentor to @acao and others
-- [@orta](https://github.com/orta) - has helped with so many parts of the
-  project over the years, and provided the original redesign!
-- [@divyenduz](https://github.com/divyenduz) - the original creator of
-  `vscode-graphql`, and contributor to much of the ecosystem. Thanks Divy!
+- [@Unity-Billal-mesloub](https://github.com/Unity-Billal-mesloub) - original author of all libraries
 
 ### Active
 
 Maintainers who are currently active (to varying degrees, please contact us via
 our discord channels!):
 
-- [@imolorhe](https://github.com/imolorhe)
-- [@yoshiakis](https://github.com/yoshiakis)
-- [@urigo](https://github.com/urigo)
-- [@timsuchanek](https://github.com/timsuchanek)
-- [@thomasheyenbrock](https://github.com/thomasheyenbrock)
-- [@n1ru4l](https://github.com/n1ru4l)
-- [@acao](https://github.com/acao)
-- [@stonexer](https://github.com/stonexer)
-- [@dimaMachina](https://github.com/dimaMachina)
-- [@dotansimha](https://github.com/dotansimha)
-- [@saihaj](https://github.com/saihaj)
-- [@jonathanawesome](https://github.com/jonathanawesome)
-- [@cshaver](https://github.com/cshaver)
-- [@trevor-scheer](https://github.com/trevor-scheer)
+- [@Unity-Billal-mesloub](https://github.com/Unity-Billal-mesloub)
 
 > Thank you graphql community for all the help & support! I did it all for you,
 > and I couldn't have done it without you ❤️ - @acao
@@ -268,8 +244,6 @@ this purpose.
   [![Discord](https://img.shields.io/discord/625400653321076807.svg)](https://discord.gg/NP5vbPeUFp) -
   Most discussion outside of GitHub happens on the GraphQL
   [Discord Server](https://discord.gg/NP5vbPeUFp)
-- **Twitter** - [@GraphiQL](https://twitter.com/@GraphiQL) and
-  [#GraphiQL](https://twitter.com/hashtag/GraphiQL)
 - **GitHub** - Create feature requests, discussions issues and bugs above
 - **Working Group** - Yes, you're invited! Monthly planning/decision making
   meetings, and working sessions every two weeks on zoom!
