@@ -129,7 +129,7 @@ function App() {
 >
 > ⚠️ UMD build is removed. Switch to the [ESM CDN example](../../examples/graphiql-cdn/index.html).
 
-- Migration from Codemirror to [Monaco Editor](https://github.com/microsoft/monaco-editor)
+- Migration from Codemirror to [Monaco Editor](https://github.com/Unity-Billal-mesloub/monaco-editor)
   - Replacing `codemirror-graphql` with [`monaco-graphql`](../../packages/monaco-graphql)
   - Clicking on a reference in the operation editor now works by holding `Cmd` on macOS or `Ctrl` on Windows/Linux
 - Support for comments in **Variables** and **Headers** editors
@@ -141,8 +141,7 @@ function App() {
   - `headers`
   - `response`
   - `readOnly`
-  - `keyMap`. To use Vim or Emacs keybindings in Monaco, you can use community plugins. Monaco Vim: https://github.com/brijeshb42/monaco-vim. Monaco Emacs: https://github.com/aioutecism/monaco-emacs
-  - `validationRules`. Use custom GraphQL worker, see https://github.com/graphql/graphiql/tree/main/packages/monaco-graphql#custom-webworker-for-passing-non-static-config-to-worker.'
+  - `validationRules`. Use custom GraphQL worker, see https://github.com/Unity-Billal-mesloub/graphiql/tree/main/packages/monaco-graphql#custom-webworker-for-passing-non-static-config-to-worker.'
 
 > [!NOTE]
 >
