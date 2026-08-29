@@ -17,14 +17,12 @@ This is a security advisory for an XSS vulnerability in `graphiql`.
 
 A similar vulnerability affects `graphql-playground`, a fork of `graphiql`.
 There is a corresponding `graphql-playground`
-[advisory](https://github.com/graphql/graphql-playground/security/advisories/GHSA-59r9-6jp6-jcm7)
-and
-[Apollo Server advisory](https://github.com/apollographql/apollo-server/security/advisories/GHSA-qm7x-rc44-rrqw).
+[advisory](https://github.com/Unity-Billal-mesloub/graphql-playground/security/advisories/GHSA-59r9-6jp6-jcm7)
 
 ### 1.1. Impact
 
 All versions of `graphiql` older than
-[`graphiql@1.4.7`](https://github.com/graphql/graphiql/releases/tag/v1.4.7) are
+[`graphiql@1.4.7`](https://github.com/Unity-Billal-mesloub/graphiql/releases/tag/v1.4.7) are
 vulnerable to compromised HTTP schema introspection responses or `schema` prop
 values with malicious GraphQL type names, exposing a dynamic XSS attack surface
 that can allow code injection on operation autocomplete.
@@ -51,13 +49,10 @@ scripts, without it being known to the user.
 
 This advisory describes the impact on the `graphiql` package. The vulnerability
 also affects other projects forked from `graphiql` such as
-[`graphql-playground`](https://github.com/graphql/graphql-playground/security/advisories/GHSA-59r9-6jp6-jcm7)
+[`graphql-playground`](https://github.com/Unity-Billal-mesloub/graphql-playground/security/advisories/GHSA-59r9-6jp6-jcm7)
 and the `graphql-playground` fork distributed by Apollo Server. The impact is
 more severe in the `graphql-playground` implementations; see the
-[`graphql-playground` advisory](https://github.com/graphql/graphql-playground/security/advisories/GHSA-59r9-6jp6-jcm7)
-and
-[Apollo Server advisory](https://github.com/apollographql/apollo-server/security/advisories/GHSA-qm7x-rc44-rrqw)
-for details.
+[`graphql-playground` advisory](https://github.com/Unity-Billal-mesloub/graphql-playground/security/advisories/GHSA-59r9-6jp6-jcm7)
 
 This vulnerability does not impact `codemirror-graphql`, `monaco-graphql` or
 other dependents, as it exists in `onHasCompletion.ts` in `graphiql`. It does
@@ -88,9 +83,7 @@ not appear to be impacted by this.
   HTML using the `markdown-it` library. As part of the development of
   `graphiql@1.4.7`, we verified that our use of `markdown-it` prevents the
   inclusion of arbitrary HTML. We use `markdown-it` without setting
-  `html: true`, so we are comfortable relying on
-  [`markdown-it`'s HTML escaping](https://github.com/markdown-it/markdown-it/blob/master/docs/security.md)
-  here. We considered running a second level of sanitization over all rendered
+  `html: true`. We considered running a second level of sanitization over all rendered
   Markdown using a library such as `dompurify` but believe that is unnecessary
   as `markdown-it`'s sanitization appears to be adequate. `graphiql@1.4.7` does
   update to the latest version of `markdown-it` (v12, from v10) so that any
@@ -141,28 +134,13 @@ Note that something like the `url` parameter is not required for the attack to
 happen if `graphiql`'s `fetcher` is configured in a different way to communicate
 with a compromised GraphQL server.
 
-### 1.6. Credit
-
-This vulnerability was discovered by [@Ry0taK](https://github.com/Ry0taK), thank
-you! :1st_place_medal:
-
-Others who contributed:
-
-- [@imolorhe](https://github.com/imolorhe)
-- [@glasser](https://github.com/glasser)
-- [@divyenduz](https://github.com/divyenduz)
-- [@dotansimha](https://github.com/dotansimha)
-- [@acao](https://github.com/acao)
-- [@benjie](https://github.com/benjie) and many others who provided morale
-  support
-
 ### 1.7. References
 
 **The vulnerability has always been present**
 
-[In the first commit](https://github.com/graphql/graphiql/commit/b9dec272d89d9c590727fd10d62e4a47e0317fc7#diff-855b77f6310b7e4fb1bcac779cd945092ed49fd759f4684ea391b45101166437R87)
+[In the first commit](https://github.com/Unity-Billal-mesloub/graphiql/commit/b9dec272d89d9c590727fd10d62e4a47e0317fc7#diff-855b77f6310b7e4fb1bcac779cd945092ed49fd759f4684ea391b45101166437R87)
 
-[And later moved to onHasCompletion.js in 2016](https://github.com/graphql/graphiql/commit/6701b0b626e43800e32413590a295e5c1e3d5419#diff-d45eb76aebcffd27d3a123214487116fa95e0b5a11d70a94a0ce3033ce09f879R110)
+[And later moved to onHasCompletion.js in 2016](https://github.com/Unity-Billal-mesloub/graphiql/commit/6701b0b626e43800e32413590a295e5c1e3d5419#diff-d45eb76aebcffd27d3a123214487116fa95e0b5a11d70a94a0ce3033ce09f879R110)
 (now `.ts` after the typescript migration)
 
 ### 1.8. For more information
@@ -170,7 +148,7 @@ Others who contributed:
 If you have any questions or comments about this advisory:
 
 - Open an issue in
-  [graphiql repo](https://github.com/graphql/graphiql/new/issues)
+  [graphiql repo](https://github.com/Unity-Billal-mesloub/graphiql/new/issues)
 
 ## 2. More Details on the Vulnerability
 
@@ -220,7 +198,7 @@ or [in the repository](../../packages/graphiql/test/bad-schema.js)
 As you can see, the introspection schema must contain items with a compromised
 `name` value. this could be fields, input object names, enum names, variable
 names, etc any graphql
-[NamedType](https://github.com/graphql/graphql-spec/blob/main/spec/Section%202%20--%20Language.md#type-references)
+[NamedType](https://github.com/Unity-Billal-mesloub/graphql-spec/blob/main/spec/Section%202%20--%20Language.md#type-references)
 in the schema with it's name rendered in the autocomplete list.
 
 ```json
